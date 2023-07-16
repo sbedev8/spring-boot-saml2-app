@@ -1,0 +1,31 @@
+server:
+  port: 8084
+
+
+spring:
+  security:
+    saml2:
+      relyingparty:
+        registration:
+          sbe:
+            assertingparty:
+              metadata-uri: "classpath:metadata/metadata-idp.xml"
+            signing:
+              credentials:
+                - private-key-location: classpath:local.key
+                  certificate-location: classpath:local.crt
+            singlelogout:
+              binding: POST
+              response-url: "http://localhost:8084/logout/saml2/slo"
+
+            identityprovider:
+              entity-id: http://www.okta.com/exk6g0qd77EUYXRpW697
+              sso-url:
+                url: https://trial-6974822.okta.com/app/trial-6974822_smal2app_1/exk6g0qd77EUYXRpW697/sso/saml
+                metadata-url: "https://trial-6974822.okta.com/app/exk6g0qd77EUYXRpW697/sso/saml/metadata"
+              verification.credentials:
+                - certificate-location: "classpath:local.crt"
+              singlesignon.sign-request: false
+
+
+
