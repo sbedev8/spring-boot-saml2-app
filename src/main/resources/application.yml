@@ -1,7 +1,6 @@
 server:
   port: 8084
 
-
 spring:
   security:
     saml2:
@@ -18,13 +17,14 @@ spring:
               binding: POST
               response-url: "http://localhost:8084/logout/saml2/slo"
 
-            identityprovider:
-              entity-id: http://www.okta.com/exk6g0qd77EUYXRpW697
-              singlesignon.url: https://trial-6974822.okta.com/app/trial-6974822_smal2app_1/exk6g0qd77EUYXRpW697/sso/saml
-#                metadata-url: "https://trial-6974822.okta.com/app/exk6g0qd77EUYXRpW697/sso/saml/metadata"
-              verification.credentials:
-                - certificate-location: "classpath:local.crt"
-              singlesignon.sign-request: false
+
+#            identityprovider:
+#              entity-id: http://www.okta.com/exk6g0qd77EUYXRpW697
+#              singlesignon.url: https://trial-6974822.okta.com/app/trial-6974822_smal2app_1/exk6g0qd77EUYXRpW697/sso/saml
+#              verification.credentials:
+#                - certificate-location: "classpath:okta.cert"
+#              singlesignon.sign-request: false
 
 
+#   metadata-url: "https://trial-6974822.okta.com/app/exk6g0qd77EUYXRpW697/sso/saml/metadata"
 #  http://localhost:8084/login/saml2/sso/sbe

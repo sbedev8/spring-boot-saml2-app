@@ -1,28 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<md:EntityDescriptor entityID="http://www.okta.com/exk6g0qd77EUYXRpW697"
-                     xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+                     entityID="http://www.okta.com/exk6g0qd77EUYXRpW697">
     <md:IDPSSODescriptor WantAuthnRequestsSigned="false"
                          protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
         <md:KeyDescriptor use="signing">
             <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
                 <ds:X509Data>
-                    <ds:X509Certificate>MIIDqjCCApKgAwIBAgIGAYleDVXFMA0GCSqGSIb3DQEBCwUAMIGVMQswCQYDVQQGEwJVUzETMBEG
+                    <ds:X509Certificate>MIIDqjCCApKgAwIBAgIGAYlgPpA3MA0GCSqGSIb3DQEBCwUAMIGVMQswCQYDVQQGEwJVUzETMBEG
                         A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU
                         MBIGA1UECwwLU1NPUHJvdmlkZXIxFjAUBgNVBAMMDXRyaWFsLTY5NzQ4MjIxHDAaBgkqhkiG9w0B
-                        CQEWDWluZm9Ab2t0YS5jb20wHhcNMjMwNzE2MDkzMzM5WhcNMzMwNzE2MDkzNDM5WjCBlTELMAkG
+                        CQEWDWluZm9Ab2t0YS5jb20wHhcNMjMwNzE2MTk0NjQwWhcNMzMwNzE2MTk0NzQwWjCBlTELMAkG
                         A1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTAL
                         BgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRYwFAYDVQQDDA10cmlhbC02OTc0ODIy
                         MRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB
-                        CgKCAQEAyzVhyQgCD9NpjF/hnk69r7V7OvfovzQGqoz37AZefchH8/wRL/H/x41JA1FY0pEsQWTT
-                        lONf5ioxJJFqZDQL0VktumzbKF9Gth8Q5L9iczbn18my6N2gG+IZyriY8HAGnd9wmI5LPyCuYPhW
-                        3cssCvIzoqzrDy/En9P8N1Nm0MSHSuZ4/bF5p9MIcGjZySXFSe0gdHC6W8hgs3TX4E7nTXmnf56J
-                        G1b8ASfieQtahweq4pKDTWnt4YsAAR9IGUnVPonx2y6ucWaMKCkfmqeBbCUJ6RpB9gs6ACkuJwFb
-                        ydHK08P4SaI3xgBrHma7yWxw48XQu9JSu2Xp4WGdCAHZhQIDAQABMA0GCSqGSIb3DQEBCwUAA4IB
-                        AQCOCXjYCFfrjI/j+M8RAVEeZjCAXUJC1hZ5hvHrjCwLRWUZ8moLzrJA7cL0eRjBRL2lOm4647Vq
-                        Pa9pLVBgCToTM28opafRhN/adcI7/C4IZ9tAQNWIBytPo1MroPmdH8QIYhHLeDyzGDOibmQo54zf
-                        tc93Cp3hqEapk5LcoKyddw1J4MMHdtKr09Mv54Vt6EMx1BN0duuRzx4jlRh5B2u+9ijq/0g6qbm7
-                        tGRCkg4aJYkKODzvmHRYwe4+amRGhSeKGl2imU/pKjjssf26Nv+znNF8n/X+gx4v9HAdl1W0iv9m
-                        YRFbBcIxD9A5DVwCN7Nodly+nIxtHCYp+/rvE9w5
+                        CgKCAQEA7woms/cyn3pFRRLejBKKhjK/6InCAaZCfVAyO8s9hsJ2KT1du7j5bq+uq6G+AYCrueCq
+                        Zjjv3gF5yRaBOJHeuEyMNy/4kzYSWI5OVdtbIR6uj5+uzJlOdVKTpOl3ydTZXbtEWAKrmr0zjSbm
+                        6Vx/KPdTINXFxleMI1rbEl/B1l3tfg90FKi39SJo3zW4GJxUpMTfw7W6Wkqof3VS0/Wh5Vrxzryd
+                        pz2AkpxSkWJF4P7xuVId8rAQ4HFbX6lL2GQrzFiytHH8iMaFUSCgptd0w1Rxi5jKvOFlCUw7Zfl0
+                        gzJ5g9fSA/E3Ai0HaEXSSiXdBG+pDIssHM84L/5LchGtuwIDAQABMA0GCSqGSIb3DQEBCwUAA4IB
+                        AQAftVrbzhB9oD1hnsBEcx2XjUt2KDg7iOLgv7bWiapqwU0ZhLpAEjg677VMOBLRA+ImzbnQcKv1
+                        lXIy2RVsWorXB89yM2YwXhceG4l72yd/a3v34G60juOoKPkXlKH9HxVipHknJiz1Z/fg8FC4VhtJ
+                        cTTwTXF4ugnp1hJoCvUEqytZdjypOAa1+T093RshjC9ghwSct5CBt6Org2WeAESq0hXRpDC10XlZ
+                        J7D9hz7GymWyzfIpNjcb53O1nKNMhRpYJAmVEvaCUAJMOnIgtWpQiQLdgOlgiNVl/PrIPBUOm0Ie
+                        v5ZMNMAhXPouj47J6USIu7kiD7mh2GLjFI+8yWRc
                     </ds:X509Certificate>
                 </ds:X509Data>
             </ds:KeyInfo>
