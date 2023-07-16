@@ -52,27 +52,50 @@ public class SecurityConfig {
 //    @Value("${private.key}")
 //    File key;
 
-//    @Autowired
-//    private RelyingPartyRegistrationRepository relyingPartyRegistrationRepository;
+    @Autowired
+    private RelyingPartyRegistrationRepository relyingPartyRegistrationRepository;
 
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-////        RelyingPartyRegistration registration = this.relyingPartyRegistrationRepository.findByRegistrationId("sbe");
-//
-//
-//        DefaultRelyingPartyRegistrationResolver relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
-//        Saml2MetadataFilter filter = new Saml2MetadataFilter(relyingPartyRegistrationResolver, new OpenSamlMetadataResolver());
-//
-//        http.authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers("/login/**", "/saml2/**").permitAll()
-//                        .anyRequest()
-//                        .authenticated())
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        RelyingPartyRegistration registration = this.relyingPartyRegistrationRepository.findByRegistrationId("sbe");
+        OpenSaml4AuthenticationProvider authenticationProvider = new OpenSaml4AuthenticationProvider();
+        authenticationProvider.setResponseAuthenticationConverter(groupsConverter());
+
+        DefaultRelyingPartyRegistrationResolver relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
+        Saml2MetadataFilter filter = new Saml2MetadataFilter(relyingPartyRegistrationResolver, new OpenSamlMetadataResolver());
+
+        http.authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/login/**", "/saml2/**").permitAll()
+                        .anyRequest()
+                        .authenticated())
 //                .saml2Login(Customizer.withDefaults())
-//                .saml2Logout(Customizer.withDefaults())
-//                .addFilterBefore(filter, Saml2WebSsoAuthenticationFilter.class);
-//        DefaultSecurityFilterChain chain = http.build();
-//        return chain;
-//    }
+                .saml2Login(saml2 -> saml2
+                        .authenticationManager(new ProviderManager(authenticationProvider)))
+                .saml2Logout(Customizer.withDefaults())
+                .addFilterBefore(filter, Saml2WebSsoAuthenticationFilter.class);
+        DefaultSecurityFilterChain chain = http.build();
+        return chain;
+    }
+
+    private Converter<OpenSaml4AuthenticationProvider.ResponseToken, Saml2Authentication> groupsConverter() {
+
+        Converter<ResponseToken, Saml2Authentication> delegate =
+                OpenSaml4AuthenticationProvider.createDefaultResponseAuthenticationConverter();
+
+        return (responseToken) -> {
+            Saml2Authentication authentication = delegate.convert(responseToken);
+            Saml2AuthenticatedPrincipal principal = (Saml2AuthenticatedPrincipal) authentication.getPrincipal();
+            List<String> groups = principal.getAttribute("groups");
+            Set<GrantedAuthority> authorities = new HashSet<>();
+            if (groups != null) {
+                groups.stream().map(SimpleGrantedAuthority::new).forEach(authorities::add);
+            } else {
+                authorities.addAll(authentication.getAuthorities());
+            }
+            System.out.println(authorities);
+            return new Saml2Authentication(principal, authentication.getSaml2Response(), authorities);
+        };
+    }
 
 //@Bean
 //public Saml2X509Credential assertingPartyVerifyingCredential() throws Exception {
@@ -85,7 +108,6 @@ public class SecurityConfig {
 //    // Create a Saml2X509Credential for verification.
 //    return Saml2X509Credential.verification(certificate);
 //}
-
 
 
 //    @Bean
@@ -156,43 +178,21 @@ public class SecurityConfig {
 //        return this.registrations;
 //    }
 
-    @Bean
-    SecurityFilterChain configure(HttpSecurity http) throws Exception {
-
-        OpenSaml4AuthenticationProvider authenticationProvider = new OpenSaml4AuthenticationProvider();
-        authenticationProvider.setResponseAuthenticationConverter(groupsConverter());
-
-        http.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/login/**", "/saml2/**").permitAll()
-                        .anyRequest().authenticated())
-                .saml2Login(saml2 -> saml2
-                        .authenticationManager(new ProviderManager(authenticationProvider)))
-                .saml2Logout(Customizer.withDefaults());
-
-        return http.build();
-    }
-
-    private Converter<OpenSaml4AuthenticationProvider.ResponseToken, Saml2Authentication> groupsConverter() {
-
-        Converter<ResponseToken, Saml2Authentication> delegate =
-                OpenSaml4AuthenticationProvider.createDefaultResponseAuthenticationConverter();
-
-        return (responseToken) -> {
-            Saml2Authentication authentication = delegate.convert(responseToken);
-            Saml2AuthenticatedPrincipal principal = (Saml2AuthenticatedPrincipal) authentication.getPrincipal();
-            List<String> groups = principal.getAttribute("groups");
-            Set<GrantedAuthority> authorities = new HashSet<>();
-            if (groups != null) {
-                groups.stream().map(SimpleGrantedAuthority::new).forEach(authorities::add);
-            } else {
-                authorities.addAll(authentication.getAuthorities());
-            }
-            System.out.println(authorities);
-            return new Saml2Authentication(principal, authentication.getSaml2Response(), authorities);
-        };
-    }
-
-
+//    @Bean
+//    SecurityFilterChain configure(HttpSecurity http) throws Exception {
+//
+//        OpenSaml4AuthenticationProvider authenticationProvider = new OpenSaml4AuthenticationProvider();
+//        authenticationProvider.setResponseAuthenticationConverter(groupsConverter());
+//
+//        http.authorizeHttpRequests(authorize -> authorize
+//                        .requestMatchers("/login/**", "/saml2/**").permitAll()
+//                        .anyRequest().authenticated())
+//                .saml2Login(saml2 -> saml2
+//                        .authenticationManager(new ProviderManager(authenticationProvider)))
+//                .saml2Logout(Customizer.withDefaults());
+//
+//        return http.build();
+//    }
 
 
 }

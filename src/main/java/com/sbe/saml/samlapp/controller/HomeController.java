@@ -10,14 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 
-//    @GetMapping("/home")
-//    public String home() {
-//        return "hello World";
-//    }
 
     @GetMapping("/home")
     public Saml2AuthenticatedPrincipal home(@AuthenticationPrincipal Saml2AuthenticatedPrincipal principal) {
         return principal;
     }
+
 
 }

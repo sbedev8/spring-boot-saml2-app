@@ -20,12 +20,11 @@ spring:
 
             identityprovider:
               entity-id: http://www.okta.com/exk6g0qd77EUYXRpW697
-              sso-url:
-                url: https://trial-6974822.okta.com/app/trial-6974822_smal2app_1/exk6g0qd77EUYXRpW697/sso/saml
-                metadata-url: "https://trial-6974822.okta.com/app/exk6g0qd77EUYXRpW697/sso/saml/metadata"
+              singlesignon.url: https://trial-6974822.okta.com/app/trial-6974822_smal2app_1/exk6g0qd77EUYXRpW697/sso/saml
+#                metadata-url: "https://trial-6974822.okta.com/app/exk6g0qd77EUYXRpW697/sso/saml/metadata"
               verification.credentials:
                 - certificate-location: "classpath:local.crt"
               singlesignon.sign-request: false
 
 
-
+#  http://localhost:8084/login/saml2/sso/sbe
